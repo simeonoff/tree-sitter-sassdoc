@@ -160,6 +160,58 @@ The following highlight capture groups are used:
 | `@module`            | Group and package names                |
 | `@property`          | Property names                         |
 
+## Text Objects
+
+For use with [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects). Example keybindings:
+
+```lua
+-- In your textobjects config
+textobjects = {
+  select = {
+    enable = true,
+    keymaps = {
+      ["ab"] = "@block.outer",        -- Select entire tag
+      ["ib"] = "@block.inner",        -- Select code block content
+      ["aa"] = "@parameter.outer",    -- Select @param/@prop tag
+      ["ia"] = "@parameter.inner",    -- Select param description
+      ["at"] = "@type.outer",         -- Select type annotation {Type}
+      ["it"] = "@type.inner",         -- Select type name only
+    },
+  },
+  move = {
+    enable = true,
+    goto_next_start = {
+      ["]b"] = "@block.outer",        -- Next tag
+      ["]a"] = "@parameter.outer",    -- Next @param
+    },
+    goto_previous_start = {
+      ["[b"] = "@block.outer",        -- Previous tag
+      ["[a"] = "@parameter.outer",    -- Previous @param
+    },
+  },
+}
+```
+
+Available captures:
+
+| Capture            | Description                                  |
+|--------------------|----------------------------------------------|
+| `@block.outer`     | Entire tag                                   |
+| `@block.inner`     | Code block content in `@example`             |
+| `@parameter.outer` | `@param` or `@prop` tag                      |
+| `@parameter.inner` | Parameter/property description               |
+| `@return.outer`    | `@return` tag                                |
+| `@return.inner`    | Return description                           |
+| `@comment.outer`   | Description block or tag description         |
+| `@comment.inner`   | Line description text                        |
+| `@type.outer`      | Type annotation with braces `{Type}`         |
+| `@type.inner`      | Type name only                               |
+| `@string.outer`    | `@link` tag                                  |
+| `@string.inner`    | URL only                                     |
+| `@variable.outer`  | Variable name (`$name`)                      |
+| `@property.outer`  | Property name (`base.colors.primary`)        |
+| `@reference.outer` | `@see` or `@require` tag                     |
+
 ## License
 
 MIT
