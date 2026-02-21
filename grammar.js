@@ -20,9 +20,18 @@ module.exports = grammar({
     document: ($) => seq(
       // Optionally consume leading ///
       optional($._comment_marker),
-      optional($.description),
-      repeat($.tag),
+      // Handle either:
+      // - Indented code line (part of @example from previous comment)
+      // - Normal sassdoc content (description + tags)
+      choice(
+        $._indented_code,  // Indented line = code from @example
+        seq(optional($.description), repeat($.tag)),
+      ),
     ),
+
+    // Matches indented content (2+ spaces) - these are code lines from @example blocks
+    // When parsing line-by-line, these appear as standalone documents
+    _indented_code: (_) => /[ \t]{2,}[^\n]*/,
 
     // Hidden: matches /// at start
     _comment_marker: (_) => token(seq("///", /[ \t]?/)),
