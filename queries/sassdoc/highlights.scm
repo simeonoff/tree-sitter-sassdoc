@@ -7,14 +7,24 @@
   "@return"
   "@returns"
   "@access"
+  "@alias"
   "@author"
   "@content"
   "@deprecated"
   "@group"
   "@ignore"
+  "@link"
+  "@source"
+  "@name"
   "@output"
+  "@outputs"
+  "@package"
+  "@property"
+  "@prop"
   "@since"
   "@throw"
+  "@throws"
+  "@exception"
   "@todo"
   "@type"
   "@see"
@@ -54,6 +64,24 @@
 
 ; Group names
 (group_name) @module
+
+; Alias names
+(alias_name) @function
+
+; Package names
+(package_name) @module
+
+; Property names
+(property_name) @property
+
+; URLs
+(url) @string.special.url
+
+; Link captions
+(link_caption) @comment
+
+; Custom names
+(custom_name) @string
 
 ; Default values
 (default_value) @string.special

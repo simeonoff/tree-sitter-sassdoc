@@ -1,0 +1,125 @@
+================================================================================
+Property with type and name
+================================================================================
+
+@prop {Color} primary
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name))))
+
+================================================================================
+Property with nested name
+================================================================================
+
+@prop {String} base.default
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name))))
+
+================================================================================
+Property with deeply nested name
+================================================================================
+
+@prop {Number} theme.colors.primary.hue
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name))))
+
+================================================================================
+Property with default value
+================================================================================
+
+@prop {Color} primary [#fff]
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name)
+      (default_value))))
+
+================================================================================
+Property with description
+================================================================================
+
+@prop {Color} primary - The primary color
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name)
+      (tag_description
+        (line_description)))))
+
+================================================================================
+Property with all parts
+================================================================================
+
+@prop {Color} base.primary [#fff] - Primary color
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name)
+      (default_value)
+      (tag_description
+        (line_description)))))
+
+================================================================================
+Property without type (defaults to Map)
+================================================================================
+
+@prop nested.value - A nested value
+
+---
+
+(document
+  (tag
+    (tag_property
+      (property_name)
+      (tag_description
+        (line_description)))))
+
+================================================================================
+Property using @property alias
+================================================================================
+
+@property {Map} themes
+
+---
+
+(document
+  (tag
+    (tag_property
+      (type
+        (type_name))
+      (property_name))))

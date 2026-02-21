@@ -44,14 +44,19 @@ module.exports = grammar({
     tag: ($) =>
       choice(
         $.tag_param,
+        $.tag_property,
         $.tag_return,
         $.tag_access,
+        $.tag_alias,
         $.tag_author,
         $.tag_content,
         $.tag_deprecated,
         $.tag_group,
         $.tag_ignore,
+        $.tag_link,
+        $.tag_name,
         $.tag_output,
+        $.tag_package,
         $.tag_since,
         $.tag_throw,
         $.tag_todo,
@@ -72,6 +77,10 @@ module.exports = grammar({
 
     tag_access: (_$) => seq("@access", choice("public", "private")),
 
+    tag_alias: ($) => seq("@alias", $.alias_name),
+
+    alias_name: (_$) => /[\w-]+/,
+
     tag_content: ($) => seq("@content", seq("[", $.line_description, "]")),
 
     tag_group: ($) => seq("@group", $.group_name),
@@ -84,16 +93,47 @@ module.exports = grammar({
 
     tag_ignore: ($) => seq("@ignore", $.line_description),
 
-    tag_output: ($) => seq("@output", $.line_description),
+    tag_link: ($) => seq(
+      choice("@link", "@source"),
+      $.url,
+      optional($.link_caption),
+    ),
+
+    url: (_$) => /https?:\/\/[^\s]+/,
+
+    link_caption: (_$) => /[^\n]+/,
+
+    tag_name: ($) => seq("@name", $.custom_name),
+
+    custom_name: (_$) => /[^\n]+/,
+
+    tag_output: ($) => seq(choice("@output", "@outputs"), $.line_description),
+
+    tag_package: ($) => seq("@package", $.package_name),
+
+    package_name: (_$) => /[\w-]+/,
 
     tag_since: ($) => seq("@since", $.version, optional($.line_description)),
 
-    tag_throw: ($) => seq("@throw", $.line_description),
+    tag_throw: ($) => seq(choice("@throw", "@throws", "@exception"), $.line_description),
 
     tag_todo: ($) => seq("@todo", $.line_description),
 
     tag_type: ($) =>
       seq("@type", seq($.type_name, repeat(seq("|", $.type_name)))),
+
+    // @property / @prop - documents map properties
+    // Format: @prop {Type} name.path [default] - description
+    tag_property: ($) => seq(
+      choice("@property", "@prop"),
+      optional($.type),
+      $.property_name,
+      optional($.default_value),
+      optional($.tag_description),
+    ),
+
+    // Property name with dot notation for nested maps (e.g., base.default)
+    property_name: (_$) => /[\w-]+(\.[\w-]+)*/,
 
     tag_return: ($) =>
       seq(
