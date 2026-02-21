@@ -1,0 +1,99 @@
+================================================================================
+Param with all parts
+================================================================================
+
+@param {String} $name [default] - The name parameter
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name)
+      (default_value)
+      (tag_description
+        (line_description)))))
+
+================================================================================
+Param with just variable
+================================================================================
+
+@param $name
+
+---
+
+(document
+  (tag
+    (tag_param
+      (variable_name))))
+
+================================================================================
+Param with type and variable
+================================================================================
+
+@param {Number} $size
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name))))
+
+================================================================================
+Param with union type
+================================================================================
+
+@param {String | Number} $value
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name)
+        (type_name))
+      (variable_name))))
+
+================================================================================
+Param using @arg alias
+================================================================================
+
+@arg {Bool} $flag - A flag
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name)
+      (tag_description
+        (line_description)))))
+
+================================================================================
+Multiple params
+================================================================================
+
+@param {String} $first
+@param {Number} $second
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name)))
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name))))

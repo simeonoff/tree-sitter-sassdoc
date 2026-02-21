@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "sassdoc",
+      "camelcase": "SassDoc",
+      "title": "SassDoc",
+      "scope": "source.sassdoc",
+      "file-types": [
+        "sassdoc"
+      ],
+      "injection-regex": "^sassdoc$",
+      "class-name": "TreeSitterSassdoc"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "SassDoc grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Simeon Simeonoff",
+        "email": "simeon@simeonoff.ninja",
+        "url": "https://github.com/simeonoff"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/simeonoff/tree-sitter-sassdoc"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

@@ -1,0 +1,39 @@
+================================================================================
+Simple description
+================================================================================
+
+This is a simple description
+
+---
+
+(document
+  (description))
+
+================================================================================
+Multi-line description
+================================================================================
+
+This is a description
+that spans multiple lines
+
+---
+
+(document
+  (description))
+
+================================================================================
+Description followed by tag
+================================================================================
+
+This is a description
+@param {String} $name
+
+---
+
+(document
+  (description)
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name))))

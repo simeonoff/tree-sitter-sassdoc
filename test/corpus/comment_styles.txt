@@ -1,0 +1,57 @@
+================================================================================
+Triple slash style - single tag
+================================================================================
+
+/// @param {String} $name
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name))))
+
+================================================================================
+Triple slash style - multiple tags
+================================================================================
+
+/// @param {String} $a
+/// @param {Number} $b
+
+---
+
+(document
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name)))
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name))))
+
+================================================================================
+Triple slash style - description and tags
+================================================================================
+
+/// This is a description
+/// @param {String} $name
+/// @return {Number}
+
+---
+
+(document
+  (description)
+  (tag
+    (tag_param
+      (type
+        (type_name))
+      (variable_name)))
+  (tag
+    (tag_return
+      (type
+        (type_name)))))

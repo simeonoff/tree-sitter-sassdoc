@@ -1,0 +1,47 @@
+================================================================================
+Example with language and description
+================================================================================
+
+@example scss - Usage example
+  .foo {
+    color: red;
+  }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (tag_description
+        (line_description))
+      (code_block))))
+
+================================================================================
+Example with just language
+================================================================================
+
+@example css
+  body { margin: 0; }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (code_block))))
+
+================================================================================
+Example with no language
+================================================================================
+
+@example
+  some-code-here
+
+---
+
+(document
+  (tag
+    (tag_example
+      (code_block))))
