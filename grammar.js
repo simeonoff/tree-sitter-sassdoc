@@ -112,11 +112,14 @@ module.exports = grammar({
 
     example_language: (_$) => token.immediate(/ [a-z]+/),
 
-    // Code block: captures content until we hit a new tag or end of input
-    // Handles both plain indented lines and /// prefixed indented lines
-    // Code block: matches indented lines that don't start with @
-    // Pattern: newline, optional ///, required indentation, content that doesn't start with @
-    code_block: (_$) => token(prec(-1, /(\n[ \t]*(\/\/\/[ \t]*)?[ \t]+[^@\n][^\n]*)+/)),
+    // Code block: captures indented lines (including those with @ like @include, @if, etc.)
+    // Each line must be either:
+    // - Empty/whitespace only  
+    // - Indented with 2+ spaces (code content, may start with @ like @include)
+    // The block ends when we hit a line with @ at position 0-1 (a SassDoc tag)
+    code_block: (_$) => token(prec(-1, 
+      /(\n[ \t]*(\/\/\/[ \t]*)?([ \t]{2,}[^\n]*)?)+/
+    )),
 
     type: ($) => seq("{", seq($.type_name, repeat(seq("|", $.type_name))), "}"),
 

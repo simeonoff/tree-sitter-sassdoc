@@ -45,3 +45,38 @@ Example with no language
   (tag
     (tag_example
       (code_block))))
+
+================================================================================
+Example with SCSS at-rules in code block
+================================================================================
+
+@example scss
+  @include mixin();
+  @if $condition {
+    color: red;
+  }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (code_block))))
+
+================================================================================
+Example with empty lines in code block
+================================================================================
+
+@example scss
+  .foo { color: red; }
+
+  .bar { color: blue; }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (code_block))))
