@@ -33,8 +33,8 @@ module.exports = grammar({
     // When parsing line-by-line, these appear as standalone documents
     _indented_code: (_) => /[ \t]{2,}[^\n]*/,
 
-    // Hidden: matches /// at start
-    _comment_marker: (_) => token(seq("///", /[ \t]?/)),
+    // Hidden: matches /// at start (high precedence to beat _description_line)
+    _comment_marker: (_) => token(prec(10, seq("///", /[ \t]?/))),
 
     // Description: one or more lines of text before any @ tag
     description: ($) => repeat1($._description_line),
