@@ -5,6 +5,26 @@
     "fields": {}
   },
   {
+    "type": "code_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "code_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "code_line",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "custom_name",
     "named": true,
     "fields": {}
@@ -561,6 +581,11 @@
     }
   },
   {
+    "type": "variable_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "-",
     "named": false
   },
@@ -697,10 +722,6 @@
     "named": false
   },
   {
-    "type": "code_block",
-    "named": true
-  },
-  {
     "type": "default_value",
     "named": true
   },
@@ -747,10 +768,6 @@
   {
     "type": "variable",
     "named": false
-  },
-  {
-    "type": "variable_name",
-    "named": true
   },
   {
     "type": "version",
