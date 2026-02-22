@@ -798,8 +798,15 @@
       }
     },
     "code_line": {
-      "type": "PATTERN",
-      "value": "[ \\t]{2,}[^\\n]*"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 3,
+        "content": {
+          "type": "PATTERN",
+          "value": "[ \\t]{2,}[^\\n]*\\n?"
+        }
+      }
     },
     "type": {
       "type": "SEQ",
@@ -941,6 +948,17 @@
         "content": {
           "type": "PATTERN",
           "value": "\\n[ \\t]*\\/\\/\\/[ \\t]?"
+        }
+      }
+    },
+    {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\/\\/\\/[ \\t]?"
         }
       }
     },

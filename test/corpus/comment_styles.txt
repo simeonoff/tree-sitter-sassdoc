@@ -55,3 +55,32 @@ Triple slash style - description and tags
     (tag_return
       (type
         (type_name)))))
+
+================================================================================
+Triple slash style - example with single-line comment
+================================================================================
+
+/// @example scss - Test
+///   .test {
+///     $result: sum(2, 3); // inline comment
+///     content: $result;
+///   }
+/// @return {number}
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (tag_description
+        (line_description))
+      (code_block
+        (code_line)
+        (code_line)
+        (code_line)
+        (code_line))))
+  (tag
+    (tag_return
+      (type
+        (type_name)))))

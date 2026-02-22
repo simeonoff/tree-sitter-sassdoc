@@ -13,6 +13,7 @@ module.exports = grammar({
   extras: (_) => [
     /[ \t]+/,                               // Horizontal whitespace
     token(prec(2, /\n[ \t]*\/\/\/[ \t]?/)), // Newline + /// prefix
+    token(prec(2, /\/\/\/[ \t]?/)),         // /// prefix after code_line consumed \n
     token(prec(1, /\n/)),                   // Plain newline
   ],
 
@@ -169,7 +170,10 @@ module.exports = grammar({
     code_block: ($) => repeat1($.code_line),
 
     // A single line of example code - content after /// with 2+ spaces of indentation
-    code_line: (_$) => /[ \t]{2,}[^\n]*/,
+    // Includes trailing \n so injected parsers (e.g. SCSS) see line boundaries,
+    // which is critical for single-line comments (//) to terminate correctly.
+    // The \n is optional to handle the last line of a code block at EOF.
+    code_line: (_$) => token(prec(3, /[ \t]{2,}[^\n]*\n?/)),
 
     type: ($) => seq("{", seq($.type_name, repeat(seq("|", $.type_name))), "}"),
 
