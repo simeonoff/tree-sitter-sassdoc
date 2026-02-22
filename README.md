@@ -43,6 +43,7 @@ This parser provides syntax highlighting and structural parsing for SassDoc docu
 - See/require references with type specifiers: `{mixin}`, `{function}`, `{variable}`, `{placeholder}`
 - Property names with dot notation: `base.colors.primary`
 - URLs with optional captions
+- **Language injection in `@example` blocks** - SCSS, CSS, HTML, JavaScript, etc.
 
 ## Installation
 
@@ -211,6 +212,19 @@ Available captures:
 | `@variable.outer`  | Variable name (`$name`)                      |
 | `@property.outer`  | Property name (`base.colors.primary`)        |
 | `@reference.outer` | `@see` or `@require` tag                     |
+| `@statement.outer` | Individual code line in `@example`           |
+
+## Language Injection
+
+The `injections.scm` query enables syntax highlighting inside `@example` code blocks:
+
+```scss
+/// @example scss
+///   $color: blue;
+///   .class { color: $color; }
+```
+
+Supported languages: Any language with a tree-sitter parser (`scss`, `css`, `html`, `javascript`, etc.)
 
 ## License
 
