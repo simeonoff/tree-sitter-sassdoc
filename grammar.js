@@ -166,9 +166,10 @@ module.exports = grammar({
     // - Empty/whitespace only  
     // - Indented with 2+ spaces (code content, may start with @ like @include)
     // The block ends when we hit a line with @ at position 0-1 (a SassDoc tag)
-    code_block: (_$) => token(prec(-1, 
-      /(\n[ \t]*(\/\/\/[ \t]*)?([ \t]{2,}[^\n]*)?)+/
-    )),
+    code_block: ($) => repeat1($.code_line),
+
+    // A single line of example code - content after /// with 2+ spaces of indentation
+    code_line: (_$) => /[ \t]{2,}[^\n]*/,
 
     type: ($) => seq("{", seq($.type_name, repeat(seq("|", $.type_name))), "}"),
 
@@ -178,7 +179,7 @@ module.exports = grammar({
 
     version: (_$) => /\d+\.\d+\.\d+/,
 
-    variable_name: (_$) => /\$\w+/,
+    variable_name: (_$) => /\$[\w-]+/,
 
     default_value: (_$) => /\[[^\]]+\]/,
 

@@ -791,15 +791,15 @@
       }
     },
     "code_block": {
-      "type": "TOKEN",
+      "type": "REPEAT1",
       "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "(\\n[ \\t]*(\\/\\/\\/[ \\t]*)?([ \\t]{2,}[^\\n]*)?)+"
-        }
+        "type": "SYMBOL",
+        "name": "code_line"
       }
+    },
+    "code_line": {
+      "type": "PATTERN",
+      "value": "[ \\t]{2,}[^\\n]*"
     },
     "type": {
       "type": "SEQ",
@@ -870,7 +870,7 @@
     },
     "variable_name": {
       "type": "PATTERN",
-      "value": "\\$\\w+"
+      "value": "\\$[\\w-]+"
     },
     "default_value": {
       "type": "PATTERN",

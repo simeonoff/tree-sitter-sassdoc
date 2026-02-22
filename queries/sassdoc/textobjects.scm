@@ -23,6 +23,9 @@
   (code_block) @block.inner)
 (tag_example) @block.outer
 
+; Individual code lines
+(code_line) @statement.outer
+
 ; Descriptions - select the description text
 (description) @comment.outer
 (line_description) @comment.inner

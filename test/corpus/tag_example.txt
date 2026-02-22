@@ -15,7 +15,10 @@ Example with language and description
       (example_language)
       (tag_description
         (line_description))
-      (code_block))))
+      (code_block
+        (code_line)
+        (code_line)
+        (code_line)))))
 
 ================================================================================
 Example with just language
@@ -30,7 +33,8 @@ Example with just language
   (tag
     (tag_example
       (example_language)
-      (code_block))))
+      (code_block
+        (code_line)))))
 
 ================================================================================
 Example with no language
@@ -44,7 +48,8 @@ Example with no language
 (document
   (tag
     (tag_example
-      (code_block))))
+      (code_block
+        (code_line)))))
 
 ================================================================================
 Example with SCSS at-rules in code block
@@ -62,7 +67,11 @@ Example with SCSS at-rules in code block
   (tag
     (tag_example
       (example_language)
-      (code_block))))
+      (code_block
+        (code_line)
+        (code_line)
+        (code_line)
+        (code_line)))))
 
 ================================================================================
 Example with empty lines in code block
@@ -79,4 +88,6 @@ Example with empty lines in code block
   (tag
     (tag_example
       (example_language)
-      (code_block))))
+      (code_block
+        (code_line)
+        (code_line)))))
