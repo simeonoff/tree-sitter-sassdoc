@@ -91,3 +91,71 @@ Example with empty lines in code block
       (code_block
         (code_line)
         (code_line)))))
+
+================================================================================
+Example with single-line comment in code block
+================================================================================
+
+@example scss
+  .test {
+    $result: sum(2, 3); // inline comment
+    content: $result;
+  }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (code_block
+        (code_line)
+        (code_line)
+        (code_line)
+        (code_line)))))
+
+================================================================================
+Example with single-line comment at start of code block
+================================================================================
+
+@example scss
+  // leading comment
+  .test {
+    content: $result;
+  }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (code_block
+        (code_line)
+        (code_line)
+        (code_line)
+        (code_line)))))
+
+================================================================================
+Example with block comment in code block
+================================================================================
+
+@example scss
+  /** block comment */
+  .test {
+    $result: subtract(3, 2); /** inline block comment */
+    content: $result;
+  }
+
+---
+
+(document
+  (tag
+    (tag_example
+      (example_language)
+      (code_block
+        (code_line)
+        (code_line)
+        (code_line)
+        (code_line)
+        (code_line)))))

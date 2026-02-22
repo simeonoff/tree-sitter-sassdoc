@@ -20,11 +20,6 @@
     }
   },
   {
-    "type": "code_line",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "custom_name",
     "named": true,
     "fields": {}
@@ -720,6 +715,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "code_line",
+    "named": true
   },
   {
     "type": "default_value",
