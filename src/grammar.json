@@ -749,8 +749,20 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "example_language"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "STRING",
+                    "value": " "
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "example_language"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -787,7 +799,7 @@
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": " [a-z]+"
+        "value": "[a-z]+"
       }
     },
     "code_block": {

@@ -155,12 +155,12 @@ module.exports = grammar({
     tag_example: ($) =>
       seq(
         "@example",
-        optional($.example_language),
+        optional(seq(token.immediate(" "), $.example_language)),
         optional($.tag_description),
         optional($.code_block),
       ),
 
-    example_language: (_$) => token.immediate(/ [a-z]+/),
+    example_language: (_$) => token.immediate(/[a-z]+/),
 
     // Code block: captures indented lines (including those with @ like @include, @if, etc.)
     // Each line must be either:

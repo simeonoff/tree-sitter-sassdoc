@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-sassdoc"
-description = "SassDoc grammar for tree-sitter"
+description = "SassDoc grammar for the tree-sitter parsing library"
 version = "0.1.0"
 authors = ["Simeon Simeonoff <simeon@simeonoff.ninja>"]
 license = "MIT"
