@@ -11,24 +11,25 @@ module.exports = grammar({
   name: "sassdoc",
 
   extras: (_) => [
-    /[ \t]+/,                               // Horizontal whitespace
+    /[ \t]+/, // Horizontal whitespace
     token(prec(2, /\n[ \t]*\/\/\/[ \t]?/)), // Newline + /// prefix
-    token(prec(2, /\/\/\/[ \t]?/)),         // /// prefix after code_line consumed \n
-    token(prec(1, /\n/)),                   // Plain newline
+    token(prec(2, /\/\/\/[ \t]?/)), // /// prefix after code_line consumed \n
+    token(prec(1, /\n/)), // Plain newline
   ],
 
   rules: {
-    document: ($) => seq(
-      // Optionally consume leading ///
-      optional($._comment_marker),
-      // Handle either:
-      // - Indented code line (part of @example from previous comment)
-      // - Normal sassdoc content (description + tags)
-      choice(
-        $._indented_code,  // Indented line = code from @example
-        seq(optional($.description), repeat($.tag)),
+    document: ($) =>
+      seq(
+        // Optionally consume leading ///
+        optional($._comment_marker),
+        // Handle either:
+        // - Indented code line (part of @example from previous comment)
+        // - Normal sassdoc content (description + tags)
+        choice(
+          $._indented_code, // Indented line = code from @example
+          seq(optional($.description), repeat($.tag)),
+        ),
       ),
-    ),
 
     // Matches indented content (2+ spaces) - these are code lines from @example blocks
     // When parsing line-by-line, these appear as standalone documents
@@ -94,11 +95,8 @@ module.exports = grammar({
 
     tag_ignore: ($) => seq("@ignore", $.line_description),
 
-    tag_link: ($) => seq(
-      choice("@link", "@source"),
-      $.url,
-      optional($.link_caption),
-    ),
+    tag_link: ($) =>
+      seq(choice("@link", "@source"), $.url, optional($.link_caption)),
 
     url: (_$) => /https?:\/\/[^\s]+/,
 
@@ -116,7 +114,8 @@ module.exports = grammar({
 
     tag_since: ($) => seq("@since", $.version, optional($.line_description)),
 
-    tag_throw: ($) => seq(choice("@throw", "@throws", "@exception"), $.line_description),
+    tag_throw: ($) =>
+      seq(choice("@throw", "@throws", "@exception"), $.line_description),
 
     tag_todo: ($) => seq("@todo", $.line_description),
 
@@ -125,13 +124,14 @@ module.exports = grammar({
 
     // @property / @prop - documents map properties
     // Format: @prop {Type} name.path [default] - description
-    tag_property: ($) => seq(
-      choice("@property", "@prop"),
-      optional($.type),
-      $.property_name,
-      optional($.default_value),
-      optional($.tag_description),
-    ),
+    tag_property: ($) =>
+      seq(
+        choice("@property", "@prop"),
+        optional($.type),
+        $.property_name,
+        optional($.default_value),
+        optional($.tag_description),
+      ),
 
     // Property name with dot notation for nested maps (e.g., base.default)
     property_name: (_$) => /[\w-]+(\.[\w-]+)*/,
@@ -145,12 +145,13 @@ module.exports = grammar({
 
     tag_see: ($) => seq("@see", optional($.see_type), $.see_reference),
 
-    tag_require: ($) => seq(
-      choice("@require", "@requires"),
-      optional($.see_type),  // Reuse see_type for {mixin}, {function}, etc.
-      $.see_reference,       // Reuse see_reference for the item name
-      optional($.tag_description),
-    ),
+    tag_require: ($) =>
+      seq(
+        choice("@require", "@requires"),
+        optional($.see_type), // Reuse see_type for {mixin}, {function}, etc.
+        $.see_reference, // Reuse see_reference for the item name
+        optional($.tag_description),
+      ),
 
     tag_example: ($) =>
       seq(
@@ -164,7 +165,7 @@ module.exports = grammar({
 
     // Code block: captures indented lines (including those with @ like @include, @if, etc.)
     // Each line must be either:
-    // - Empty/whitespace only  
+    // - Empty/whitespace only
     // - Indented with 2+ spaces (code content, may start with @ like @include)
     // The block ends when we hit a line with @ at position 0-1 (a SassDoc tag)
     code_block: ($) => repeat1($.code_line),
@@ -179,7 +180,16 @@ module.exports = grammar({
 
     reference: (_$) => choice("mixin", "function", "variable", "placeholder"),
 
-    type_name: (_$) => /\w+/,
+    type_name: (_$) =>
+      token(
+        choice(
+          "*", // wildcard — any type
+          "()", // empty list literal
+          /[a-zA-Z][\w-]*\.\.\./, // rest type: Map...
+          /[a-zA-Z][\w-]*<[\w-]+>/, // generic: List<Color>
+          /[a-zA-Z][\w-]*/, // standard: Map, box-shadow, Bool, null
+        ),
+      ),
 
     version: (_$) => /\d+\.\d+\.\d+/,
 
