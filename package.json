@@ -33,20 +33,13 @@
   ],
   "dependencies": {
     "node-addon-api": "^8.5.0",
-    "node-gyp-build": "^4.8.4"
+    "node-gyp-build": "^4.8.4",
+    "sass": "^1.97.3"
   },
   "devDependencies": {
     "prebuildify": "^6.0.1",
     "tree-sitter": "^0.22.4",
-    "tree-sitter-cli": "^0.25.10"
-  },
-  "peerDependencies": {
-    "tree-sitter": "^0.22.4"
-  },
-  "peerDependenciesMeta": {
-    "tree-sitter": {
-      "optional": true
-    }
+    "tree-sitter-cli": "^0.26.5"
   },
   "scripts": {
     "install": "node-gyp-build",
