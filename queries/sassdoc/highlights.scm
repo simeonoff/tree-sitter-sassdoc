@@ -36,70 +36,83 @@
   "@example"
   "@require"
   "@requires"
-] @keyword
+] @keyword @nospell
 
 ; Access modifiers
 (tag_access
-  ["public" "private"] @keyword.modifier)
+  ["public" "private"] @keyword.modifier @nospell)
 
 ; Reference types
-(reference) @type
+(reference) @type @nospell
 
 ; Type names
-(type_name) @type
+(type_name) @type @nospell
 
 ; Variable names
-(variable_name) @variable
+(variable_name) @variable @nospell
 
 ; Version numbers
-(version) @number
+(version) @number @nospell
 
 ; Description text
 (description) @comment.documentation
 (line_description) @comment.documentation
 
 ; Example language identifier
-(example_language) @label
+(example_language) @label @nospell
 
 ; Code blocks and lines - use @comment.documentation as fallback,
 ; injection will override with language-specific highlights
-(code_block) @comment.documentation
-(code_line) @comment.documentation
+(code_block) @comment.documentation @nospell
+(code_line) @comment.documentation @nospell
 
 ; See references
-(see_reference) @function
+(see_reference) @function @nospell
 
 ; Group names
-(group_name) @module
+(group_name) @module @nospell
 
 ; Alias names
-(alias_name) @function
+(alias_name) @function @nospell
 
 ; Package names
-(package_name) @module
+(package_name) @module @nospell
 
 ; Property names
-(property_name) @property
+(property_name) @property @nospell
 
 ; URLs
-(url) @string.special.url
+(url) @string.special.url @nospell
 
 ; Link captions
 (link_caption) @comment.documentation
 
 ; Custom names
-(custom_name) @string
+(custom_name) @string @nospell
 
 ; Default values
-(default_value) @string.special
+(default_value) @string.special @nospell
 
 ; Punctuation
 [
   "{"
   "}"
-] @punctuation.bracket
+] @punctuation.bracket @nospell
 
-"|" @punctuation.delimiter
+"|" @punctuation.delimiter @nospell
 
 (tag_description
-  "-" @punctuation.delimiter)
+  "-" @punctuation.delimiter @nospell)
+
+; Paints ERROR nodes and all their named children uniformly as
+; doc comment text, preventing fragmented coloring from misrecovered
+; nodes (e.g. example_language, inner ERROR) inside parse errors
+(ERROR) @comment.documentation @nospell
+(ERROR
+  (example_language) @comment.documentation @nospell)
+(ERROR
+  (ERROR) @comment.documentation @nospell)
+(ERROR
+  "{" @comment.documentation @nospell)
+(ERROR
+  "}" @comment.documentation @nospell)

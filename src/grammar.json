@@ -880,8 +880,32 @@
       ]
     },
     "type_name": {
-      "type": "PATTERN",
-      "value": "\\w+"
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "*"
+          },
+          {
+            "type": "STRING",
+            "value": "()"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[a-zA-Z][\\w-]*\\.\\.\\."
+          },
+          {
+            "type": "PATTERN",
+            "value": "[a-zA-Z][\\w-]*<[\\w-]+>"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[a-zA-Z][\\w-]*"
+          }
+        ]
+      }
     },
     "version": {
       "type": "PATTERN",
